@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
+    <html itemscope itemtype="http://schema.org/Article">
+
+    <!-- Place this data between the <head> tags of your website -->
+    <title>Page Title. Maximum length 60-70 characters</title>
+    <meta name="description" content="Demonstration of using CodeMirror" />
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="CodeMirror Demo">
+    <meta itemprop="description" content="CodeMirror Demo">
+    <meta itemprop="image" content="http://www.example.com/image.jpg">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@publisher_handle">
+    <meta name="twitter:title" content="Page Title">
+    <meta name="twitter:description" content="Page description less than 200 characters">
+    <meta name="twitter:creator" content="@author_handle">
+    <!-- Twitter summary card with large image must be at least 280x150px -->
+    <meta name="twitter:image:src" content="http://www.example.com/image.jpg">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Title Here" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://www.example.com/" />
+    <meta property="og:image" content="http://example.com/image.jpg" />
+    <meta property="og:description" content="Description Here" />
+    <meta property="og:site_name" content="Site Name, i.e. Moz" />
+    <meta property="article:published_time" content="2013-09-17T05:59:00+01:00" />
+    <meta property="article:modified_time" content="2013-09-16T19:08:47+01:00" />
+    <meta property="article:section" content="Article Section" />
+    <meta property="article:tag" content="Article Tag" />
+    <meta property="fb:admins" content="Facebook numberic ID" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Code Mirror Demo</title>
+
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/lib/codemirror.js"></script>
+    <script src="codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="codemirror/mode/javascript/javascript.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+
+        <textarea name="editor" id="editor">
+/*
+    A function which returns the summation of arguments
+*/
+function numbersSum(numA, numB) {
+  var result;
+
+  // Write your code below
+
+  return result;
+}
+        </textarea>
+        <button class="run-btn" onclick="runCode();">Check Code</button>
+
+        <script>
+            let myCodeMirror;
+            let tests = [
+                { test: "\nnumbersSum(1,2)", testType: 'eval', result: 3 },
+                { test: "\nnumbersSum(1,-1)", testType: 'eval', result: 0 }
+            ]
+
+            window.onload = function () {
+
+                myCodeMirror =
+                    CodeMirror.fromTextArea(document.getElementById('editor'), {
+                    mode: "javascript",
+                    theme: "default",
+                    lineNumbers: true
+                });
+
+            };
+
+            function runCode() {
+                let correct = 0;
+                tests.forEach((test) => {
+                    let result = eval(myCodeMirror.getValue() + test.test);
+                    if (result === test.result) {
+                        // console.log(test.test, 'true');
+                        correct++
+                    }
+                    // } else {
+                    //     // console.log(test.test, 'false');
+                    // }
+                });
+                console.log(`\nYou got ${correct} out of ${tests.length} correct!`);
+            }
+        </script>
+    </body>
+</html>
